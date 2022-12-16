@@ -1,0 +1,19 @@
+Les fractales:
+
+Un petit peu d'histoire des fractles (pour la correction):
+Study around Mandelbrot and Julia are a part of complex dynamics.
+It is a field of mathematics which studies the behavior of iterstive functions 
+in a complex plane. (Pionered by P. Fatou and G. Julia in 1920) 
+
+Fatou explored was the first do explore the function which defines Mandebroot 
+fractals. He wasnt able to draw it. It was drawn 60 years later.
+blablabla... (we can come back to this later)
+
+
+
+Ensemble de Julia:
+tout d'abord savoir ce que c'est une fonction entiere.
+
+Une fonction entiere semble etre une fonction f definie sur un plan complexe.
+
+
