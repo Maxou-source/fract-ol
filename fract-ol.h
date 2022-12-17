@@ -6,7 +6,7 @@
 /*   By: mparisse <mparisse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 15:50:13 by mparisse          #+#    #+#             */
-/*   Updated: 2022/12/16 07:18:43 by mparisse         ###   ########.fr       */
+/*   Updated: 2022/12/17 16:09:18 by mparisse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ typedef struct s_vars {
 }   t_vars;
 
 typedef struct s_complex_n {
-	float	x;
-	float	y;
+	float	re;
+	float	im;
 }	t_complex_n;
 
 typedef struct s_middle
