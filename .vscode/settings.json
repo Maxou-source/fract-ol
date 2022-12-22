@@ -1,8 +1,3 @@
 {
-    "files.associations": {
-        "fract-ol.h": "c",
-        "stdlib.h": "c"
-    },
-    "editor.useTabStops": true,
-    "editor.stickyTabStops": true
+    "files.autoSave": "onWindowChange"
 }

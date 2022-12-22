@@ -12,6 +12,20 @@
 
 #include <stdlib.h>
 #include <math.h>
+#include <stdio.h>
+#include "mlx_linux/mlx.h"
+
+
+
+typedef struct s_plane
+{
+	float	remin;
+	float	remax;
+	float	immin;
+	float	immax;
+	float	size_view;
+	float	pixelsize;
+} t_plane;
 
 typedef struct s_vars {
     void    *mlx;
@@ -44,3 +58,5 @@ typedef struct	s_data {
 	int		line_length;
 	int		endian;
 }				t_data;
+
+// t_vars    init_vars(t_vars vars);

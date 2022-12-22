@@ -64,15 +64,15 @@ int	main(void)
     t_circle     circle;
 
 	vars.mlx = mlx_init();
-    vars.size_win_x = 500;
-    vars.size_win_y = 500;
+    vars.size_win_x = 1000;
+    vars.size_win_y = 1000;
     middle.middle_x = vars.size_win_x / 2;
     middle.middle_y = vars.size_win_y / 2;
 	vars.win = mlx_new_window(vars.mlx, vars.size_win_x, vars.size_win_y, "Hello world!");
 	img.img = mlx_new_image(vars.mlx, vars.size_win_x, vars.size_win_y);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
-    circle.rayon = 250;
+    circle.rayon = 500;
     circle.diametres = circle.rayon * 2;
     draw_circle(middle.middle_x, middle.middle_y, circle.rayon, img);
     // my_mlx_pixel_put(&img, middle.middle_x + circle.rayon, middle.middle_y, 0x00FF544);
