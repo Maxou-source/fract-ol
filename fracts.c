@@ -6,21 +6,18 @@
 /*   By: mparisse <mparisse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 06:36:12 by mparisse          #+#    #+#             */
-/*   Updated: 2022/12/17 18:02:41 by mparisse         ###   ########.fr       */
+/*   Updated: 2022/12/23 02:33:07 by mparisse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fract-ol.h"
-
+#include <string.h>
 // int	is_a_mandelbroot_set()
 // {
 	
 // }
 // Zn+1 =Zn(carre) + c
 
-#define NMAX 200
-#define	SIZERE 1000
-#define SIZEIM 1000
 // b negatif -> 
 
 t_complex_n	function(t_complex_n arg1, t_complex_n arg2)
@@ -89,15 +86,20 @@ int	main(int ac, char **av)
 	t_data	img;
 	t_plane	plane;
 
-	printf("%s \n",av[1]);
-	printf("ac : %d", ac);
-	// if (ac == 2)
-	// {
-	// 	if (av[1] != "Mandelbroot")
-	// 		return (0);
-	// }
-	// else
-	// 	return (0);
+	// printf("%s \n",av[1]);
+	// printf("ac : %d \n", ac);
+	if (ac == 2)
+	{
+		// float hht = 1.0 / 80.0;
+	// printf("> %f\n", hht);
+	// exit(0);
+		printf("valeur  de ret %d ", strcmp(av[1], "Mandelbrot"));
+		if (strcmp(av[1], "Mandelbrot") != 0)
+			return (0);
+	}
+	else
+		return (0);
+	// printf("c parti");
 	plane.remin = -2;
 	plane.remax = 2;
 	plane.immin = -1;
@@ -108,7 +110,7 @@ int	main(int ac, char **av)
 	vars.mlx = mlx_init();
 	vars.size_win_x = 1000;
 	vars.size_win_y = 500;
-	vars.win = mlx_new_window(vars.mlx, vars.size_win_x, vars.size_win_y, "Mandelbroot");
+	vars.win = mlx_new_window(vars.mlx, vars.size_win_x, vars.size_win_y, av[1]);
 	// init_vars(vars);
 	img.img = mlx_new_image(vars.mlx, vars.size_win_x, vars.size_win_y);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
@@ -145,7 +147,15 @@ int	main(int ac, char **av)
 					break;
 			}
 			if (n != NMAX)
-				my_mlx_pixel_put(&img, i_win_x, j, 0x001693);
+			{
+				double t = (n / NMAX);
+				double r = 9.0 * (1 - t) * pow(t, 3) * 255.0;
+				double g = 15.0 * pow((1 - t), 2) * pow(t, 2) * 255.0;
+				double b = 8.5 * pow((1 - t), 3) * t * 255.0;
+				// printf("%f , %d\n", t, n);
+// exit(0);
+				my_mlx_pixel_put(&img, i_win_x, j, r * g * b); // 5779
+			}
 				// printf("okokoko\nokokok\n");
 			i_win_x++;
 		}

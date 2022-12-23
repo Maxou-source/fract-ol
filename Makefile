@@ -6,7 +6,7 @@
 #    By: mparisse <mparisse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/18 10:32:25 by mparisse          #+#    #+#              #
-#    Updated: 2022/12/18 10:32:28 by mparisse         ###   ########.fr        #
+#    Updated: 2022/12/23 01:58:18 by mparisse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS = fracts.c  mlx_stuff.c
 
 OBJS = ${SRCS:.c=.o}
 
-CC = gcc
+CC = gcc -O3
 
 LIBS = libmlx_Linux.a -lm -lX11 -lXext  
 

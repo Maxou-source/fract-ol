@@ -6,7 +6,7 @@
 /*   By: mparisse <mparisse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 15:50:13 by mparisse          #+#    #+#             */
-/*   Updated: 2022/12/17 16:09:18 by mparisse         ###   ########.fr       */
+/*   Updated: 2022/12/23 02:21:01 by mparisse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include "mlx_linux/mlx.h"
 
 
+#define NMAX 256.
+#define	SIZERE 1000
+#define SIZEIM 1000
 
 typedef struct s_plane
 {
