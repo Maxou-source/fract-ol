@@ -6,7 +6,7 @@
 /*   By: mparisse <mparisse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 06:36:12 by mparisse          #+#    #+#             */
-/*   Updated: 2022/12/23 02:33:07 by mparisse         ###   ########.fr       */
+/*   Updated: 2022/12/23 03:18:48 by mparisse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,10 @@ int     keyhook(int key_code, t_vars *init)
 {
     (void) key_code;
     printf("key code : %d\n", key_code);
+	if (key_code == 65307 || key_code == 113)
+    	mlx_loop_end(init->mlx);
+		
     return (0);
-    //mlx_loop_end(init);
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
