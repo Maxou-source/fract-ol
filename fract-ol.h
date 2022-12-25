@@ -84,4 +84,7 @@ t_plane	decrement_plane(t_plane plane);
 t_plane	increment_plane(t_plane plane);
 t_plane	plane_to_left(t_plane plane);
 t_plane	plane_to_right(t_plane plane);
+t_plane	plane_to_up(t_plane plane);
+t_plane	plane_to_down(t_plane plane);
+
 

@@ -29,16 +29,28 @@ int	keyhook(int key_code, t_vars *vars, t_data *img)
 	printf("key code : %d\n", key_code);
 	mlx_mouse_get_pos(vars->mlx ,vars->win, &x, &y);
 	printf("x : %d \n", x);
-	if (key_code == 65362)
+	if (key_code == 111)
 	{
 		// mlx_clear_window(vars->mlx, vars->win);
 		*(vars->plane) = decrement_plane(*(vars->plane));
 		mandel(*(vars->plane), *vars);
 	}
-	if (key_code == 65364)
+	if (key_code == 108)
 	{
 		// mlx_clear_window(vars->mlx, vars->win);
 		*(vars->plane) = increment_plane(*(vars->plane));
+		mandel(*(vars->plane), *vars);
+	}
+	if (key_code == 65362)
+	{
+		// mlx_clear_window(vars->mlx, vars->win);
+		*(vars->plane) = plane_to_up(*(vars->plane));
+		mandel(*(vars->plane), *vars);
+	}
+	if (key_code == 65364)
+	{
+		// mlx_clear_window(vars->mlx, vars->win);
+		*(vars->plane) = plane_to_down(*(vars->plane));
 		mandel(*(vars->plane), *vars);
 	}
 	if (key_code == 65361)

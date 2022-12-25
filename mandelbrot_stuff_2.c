@@ -36,8 +36,27 @@ t_plane	increment_plane(t_plane plane)
 	return (plane);
 }
 
+
 // left gauche
 // right droite
+
+t_plane	plane_to_up(t_plane plane)
+{
+	plane.immin = plane.immin + 0.1;
+	plane.immax = plane.immax + 0.1;
+	plane.size_view = plane.remax - plane.remin;
+	plane.pixelsize = plane.size_view / 1000;
+	return (plane);	
+}
+
+t_plane	plane_to_down(t_plane plane)
+{
+	plane.immin = plane.immin - 0.1;
+	plane.immax = plane.immax - 0.1;
+	plane.size_view = plane.remax - plane.remin;
+	plane.pixelsize = plane.size_view / 1000;
+	return (plane);
+}
 
 t_plane	plane_to_left(t_plane plane)
 {
