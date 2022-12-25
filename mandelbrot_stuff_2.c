@@ -20,6 +20,8 @@ t_plane	decrement_plane(t_plane plane)
 	plane.immax = plane.immax - 0.1;
 	plane.size_view = plane.remax - plane.remin;
 	plane.pixelsize = plane.size_view / 1000;
+	printf("en abs -> min : %f max : %f \n", plane.remin, plane.remax);
+	printf("en ordonne -> min : %f max : %f \n", plane.immin, plane.immax);
 	return (plane);
 }
 
