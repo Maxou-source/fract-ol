@@ -20,6 +20,7 @@
 
 
 #define NMAX 255.
+#define SCALE 0.9
 #define	SIZERE 1000
 #define SIZEIM 1000
 
@@ -30,14 +31,17 @@ typedef struct s_plane
 	float	immin;
 	float	immax;
 	float	size_view;
+	float	size_view_y;
 	float	pixelsize;
+	float	xratio;
+	float	yratio;
 } t_plane;
 
 typedef struct s_vars {
     void    *mlx;
     void    *win;
-	int		size_win_x;
-	int		size_win_y;
+	float		size_win_x;
+	float		size_win_y;
 	void	*data;
 	t_plane	*plane;
 }   t_vars;
@@ -87,4 +91,5 @@ t_plane	plane_to_right(t_plane plane);
 t_plane	plane_to_up(t_plane plane);
 t_plane	plane_to_down(t_plane plane);
 
-
+// print consigne
+void	print_consigne();

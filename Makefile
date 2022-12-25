@@ -13,7 +13,7 @@
 NAME = fractol
 
 SRCS = fracts_p.c mlx_stuff.c mandelbrot_stuff.c \
-mandelbrot_stuff_2.c 
+mandelbrot_stuff_2.c print_consigne.c
 
 OBJS = ${SRCS:.c=.o}
 

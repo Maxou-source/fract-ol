@@ -40,7 +40,6 @@ void	mandel(t_plane plane, t_vars vars)
 				my_mlx_pixel_put(&img, i, j, rgb);
 			}
 			i++;
-
 		}
 		j++;
 	}
@@ -53,6 +52,8 @@ int	parsing(char *str)
 {
 	if (ft_strcmp(str, "Mandelbrot") == 0)
 		return (1);
+	if (ft_strcmp(str, "Julia") == 0)
+		return (2);
 	return (0);
 }
 
@@ -66,10 +67,11 @@ int	main(int ac, char **av)
 	plane.immin = -1.0;
 	plane.immax = 1.0;
 	plane.size_view = plane.remax - plane.remin;
+	plane.size_view_y = plane.immax - plane.immin;
 	plane.pixelsize = plane.size_view / 1000;
 	vars.mlx = mlx_init();
-	vars.size_win_x = 1000;
-	vars.size_win_y = 500;
+	vars.size_win_x = 1000.;
+	vars.size_win_y = 500.;
 	vars.win = mlx_new_window(vars.mlx, vars.size_win_x, vars.size_win_y,
 			"Mandelbrot");
 	vars.plane = &plane;
@@ -86,7 +88,10 @@ int	main(int ac, char **av)
 		mlx_loop(vars.mlx);
 	}
 	else
+	{
+		print_consigne();
 		return (0);
+	}
 	return (0);
 }
 

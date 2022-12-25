@@ -21,18 +21,51 @@ int	ft_close(t_vars *vars)
 	exit(0);
 }
 
+t_plane	find_new_plane(t_plane plane)
+{
+	float	keep;
+	float	keep2;
+	float	a;
+	float	b;
+
+	// keep = plane.size_view;
+	// plane.size_view = SCALE * plane.size_view;
+	a = (SCALE * plane.size_view) - plane.size_view;
+	// keep2 = plane.size_view_y;
+	// plane.size_view_y = SCALE * plane.size_view_y;
+	b = (SCALE * plane.size_view_y) - plane.size_view_y;
+
+	plane.remin = plane.remin - (a * plane.xratio);
+	plane.remax = plane.remax + (a * (1 - plane.xratio));
+	plane.immax = plane.immax + (b * plane.yratio);
+	plane.immin = plane.immin - (b * (1 - plane.yratio));
+	plane.size_view = plane.remax - plane.remin;
+	plane.size_view_y = plane.immax - plane.immin;
+	plane.pixelsize = plane.size_view / 1000;
+	return (plane);
+}
+
 int	keyhook(int key_code, t_vars *vars, t_data *img)
 {
 	int	x;
 	int y;
+	float xratio;
+	float yratio;
 
 	printf("key code : %d\n", key_code);
-	mlx_mouse_get_pos(vars->mlx ,vars->win, &x, &y);
-	printf("x : %d \n", x);
+	yratio = y / vars->size_win_y;
+	// printf("remin : %f", vars->size_win_x);
+	printf("remin : %f \n", (vars->plane->remin));
+	// printf("re : %d \nim : %d", x, y);
 	if (key_code == 111)
 	{
 		// mlx_clear_window(vars->mlx, vars->win);
-		*(vars->plane) = decrement_plane(*(vars->plane));
+		mlx_mouse_get_pos(vars->mlx ,vars->win, &x, &y);
+		printf("x : %d y : %d\n", x , y);
+		(vars->plane->xratio) = x / vars->size_win_x;
+		(vars->plane->yratio) = y / vars->size_win_y;
+		*(vars->plane) = find_new_plane(*(vars->plane));
+		// *(vars->plane) = decrement_plane(*(vars->plane));
 		mandel(*(vars->plane), *vars);
 	}
 	if (key_code == 108)
