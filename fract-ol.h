@@ -14,9 +14,12 @@
 #include <math.h>
 #include <stdio.h>
 #include "mlx_linux/mlx.h"
+#include <unistd.h>
+#include "libft/libft.h"
+#include "libft/ft_printf.h"
 
 
-#define NMAX 256.
+#define NMAX 255.
 #define	SIZERE 1000
 #define SIZEIM 1000
 
@@ -35,6 +38,8 @@ typedef struct s_vars {
     void    *win;
 	int		size_win_x;
 	int		size_win_y;
+	void	*data;
+	t_plane	*plane;
 }   t_vars;
 
 typedef struct s_complex_n {
@@ -62,4 +67,21 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
-// t_vars    init_vars(t_vars vars);
+void	mandel(t_plane plane, t_vars vars);
+int     ft_close(t_vars *vars);
+int     keyhook(int key_code, t_vars *init, t_data *img);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+// Mandelbrot stuff 1
+int		get_color(float t);
+int		is_mandel(t_complex_n c, t_vars vars);
+float	check(t_complex_n z);
+void	init_mandel(t_data *img, t_vars *vars);
+t_complex_n	function(t_complex_n arg1, t_complex_n arg2);
+
+// Mandelbrot stuff 2
+t_plane	decrement_plane(t_plane plane);
+t_plane	increment_plane(t_plane plane);
+t_plane	plane_to_left(t_plane plane);
+t_plane	plane_to_right(t_plane plane);
+

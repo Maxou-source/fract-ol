@@ -5,39 +5,36 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mparisse <mparisse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/12/18 10:32:25 by mparisse          #+#    #+#              #
-#    Updated: 2022/12/25 15:08:06 by mparisse         ###   ########.fr        #
+#    Created: 2022/10/05 17:21:41 by mparisse          #+#    #+#              #
+#    Updated: 2022/12/23 15:25:17 by mparisse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fractol
-
-SRCS = fracts_p.c mlx_stuff.c mandelbrot_stuff.c \
-mandelbrot_stuff_2.c 
+SRCS = ft_strcmp.c ft_utils.c ft_printf.c
 
 OBJS = ${SRCS:.c=.o}
 
-CC = gcc -O3
+NAME = libft.a
 
-LIBS = libmlx_Linux.a -lm -lX11 -lXext  
+CC = gcc
 
-all : $(NAME)
+CFLAGS = -Wall -Werror -Wextra 
 
-$(NAME) : ${OBJS}
-	make -C libft/ fclean
-	make -C libft 
-	mv libft/libft.a . 
-	$(CC) $(OBJS) $(LIBS) libft.a -o $(NAME)
+${NAME}:	${OBJS}
+		ar rc libft.a ${OBJS}
 
-norme :
-	norminette $(SRCS)
+so:
+	${CC} -nostartfiles -shared -o libft.so ${CFLAGS} ${SRCS}
 
-clean : 
-	rm -rf $(OBJS)
+norme:
+	norminette ${SRCS}
 
-fclean : clean
-	rm -rf $(NAME)
+all:	${NAME}
 
-re : fclean $(NAME)
+clean:
+	rm -rf ${OBJS}
 
-.PHONY : all clean fclean re
+fclean:	clean
+	rm -rf  ${NAME}
+
+re:	fclean ${NAME}

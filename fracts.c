@@ -62,7 +62,6 @@ int     keyhook(int key_code, t_vars *init)
     printf("key code : %d\n", key_code);
 	if (key_code == 65307 || key_code == 113)
     	mlx_loop_end(init->mlx);
-		
     return (0);
 }
 
@@ -74,7 +73,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int     close(t_vars *vars)
+int     ft_close(t_vars *vars)
 {
     // mlx_destroy_display(vars);
     mlx_destroy_window(vars->mlx, vars->win);
@@ -166,7 +165,7 @@ int	main(int ac, char **av)
 	}
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
     mlx_key_hook(vars.win, &keyhook, &vars);
-    mlx_hook(vars.win, 33, 1L<<17, close, &vars);
+    mlx_hook(vars.win, 33, 1L<<17, ft_close, &vars);
 	mlx_loop(vars.mlx);
 	// ok = 2.5;
 	// printf("%f", ok);
