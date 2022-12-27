@@ -80,8 +80,8 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		get_color(float t);
 int		is_mandel(t_complex_n c, t_vars vars);
 float	check(t_complex_n z);
-void	init_mandel(t_data *img, t_vars *vars);
-t_complex_n	function(t_complex_n arg1, t_complex_n arg2);
+void	init_img(t_data *img, t_vars *vars);
+t_complex_n	function_mandel(t_complex_n arg1, t_complex_n arg2);
 
 // Mandelbrot stuff 2
 t_plane	decrement_plane(t_plane plane);

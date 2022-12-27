@@ -12,7 +12,7 @@
 
 #include "fract-ol.h"
 
-void	init_mandel(t_data *img, t_vars *vars)
+void	init_img(t_data *img, t_vars *vars)
 {
 	img->img = mlx_new_image(vars->mlx, vars->size_win_x, vars->size_win_y);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
