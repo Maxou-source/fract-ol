@@ -1,0 +1,10 @@
+Functions and there purpose:
+
+mlx_init:
+the mlx_init function established a connection to the correct graphical system
+it will return a void pointer which holds the location of our current MLX instance.
+
+
+mlx_new_window:
+it returns a pointer to the a window. the paramaterers are:
+mlx, height, width, title.
