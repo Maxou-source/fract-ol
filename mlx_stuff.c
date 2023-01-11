@@ -6,99 +6,146 @@
 /*   By: mparisse <mparisse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:16:57 by mparisse          #+#    #+#             */
-/*   Updated: 2022/12/28 00:31:42 by mparisse         ###   ########.fr       */
+/*   Updated: 2023/01/07 18:05:29 by mparisse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract-ol.h"
+#include "fractol.h"
 
-int	ft_close(t_vars *vars)
+void	mandel_movements(int key_button, t_vars *vars, int key_mouse)
 {
-	mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_display(vars->mlx);
-	free(vars->mlx);
-	vars->mlx = 0;
-	exit(0);
+	if (key_mouse == 0)
+	{
+		if (key_button == UP)
+			mandel(plane_to_up(vars), *vars);
+		if (key_button == DOWN)
+			mandel(plane_to_down(vars), *vars);
+		if (key_button == LEFT)
+			mandel(plane_to_left(vars), *vars);
+		if (key_button == RIGHT)
+			mandel(plane_to_right(vars), *vars);
+		if (key_button >= COLOR1 && key_button <= COLOR3)
+			mandel(*vars->plane, change_color(vars, key_button));
+		else if (key_button == 65307 || key_button == 113)
+		{
+			mlx_clear_window(vars->mlx, vars->win);
+			ft_close(vars);
+		}
+	}
+	if (key_mouse == 1)
+	{
+		if (key_button == 4)
+			mandel(find_new_plane_in(vars, vars->plane), *vars);
+		if (key_button == 5)
+			mandel(find_new_plane_out(vars, vars->plane), *vars);
+	}
 }
 
-int mouse_hook(int button, int x,int y, t_vars *vars)
+void	julia_movements(int key_button, t_vars *vars, int key_mouse)
 {
-	if (button == 4)
+	if (key_mouse == 0)
 	{
-		(vars->plane->xratio) = x / vars->size_win_x;
-		(vars->plane->yratio) = y / vars->size_win_y;
-		*(vars->plane) = find_new_plane_in(*(vars->plane));
-		mandel(*(vars->plane), *vars);
+		if (key_button == UP)
+			julia(plane_to_up(vars), *vars);
+		if (key_button == DOWN)
+			julia(plane_to_down(vars), *vars);
+		if (key_button == LEFT)
+			julia(plane_to_left(vars), *vars);
+		if (key_button == RIGHT)
+			julia(plane_to_right(vars), *vars);
+		if (key_button >= COLOR1 && key_button <= COLOR3)
+			julia(*vars->plane, change_color(vars, key_button));
+		else if (key_button == 65307 || key_button == 113)
+		{
+			mlx_clear_window(vars->mlx, vars->win);
+			ft_close(vars);
+		}
 	}
-	if (button == 5)
+	if (key_mouse == 1)
 	{
-		(vars->plane->xratio) = x / vars->size_win_x;
-		(vars->plane->yratio) = y / vars->size_win_y;
-		*(vars->plane) = find_new_plane_out(*(vars->plane));
-		mandel(*(vars->plane), *vars);
+		if (key_button == 4)
+			julia(find_new_plane_in(vars, vars->plane), *vars);
+		if (key_button == 5)
+			julia(find_new_plane_out(vars, vars->plane), *vars);
 	}
-	printf("x: %d | y: %d\n", x, y);
+}
+
+void	newton_movements(int key_button, t_vars *vars, int key_mouse)
+{
+	if (key_mouse == 0)
+	{
+		if (key_button == UP)
+			newton(plane_to_up(vars), *vars);
+		if (key_button == DOWN)
+			newton(plane_to_down(vars), *vars);
+		if (key_button == LEFT)
+			newton(plane_to_left(vars), *vars);
+		if (key_button == RIGHT)
+			newton(plane_to_right(vars), *vars);
+		if (key_button == COLOR1 || key_button == COLOR2)
+			newton(*vars->plane, change_color(vars, key_button));
+		else if (key_button == 65307 || key_button == 113)
+		{
+			mlx_clear_window(vars->mlx, vars->win);
+			ft_close(vars);
+		}
+	}
+	if (key_mouse == 1)
+	{
+		if (key_button == 4)
+			newton(find_new_plane_in(vars, vars->plane), *vars);
+		if (key_button == 5)
+			newton(find_new_plane_out(vars, vars->plane), *vars);
+	}
+}
+
+int	mouse_hook(int button, int x, int y, t_vars *vars)
+{
+	vars->posx = x;
+	vars->posy = y;
+	if (vars->fractal == MANDEL)
+		mandel_movements(button, vars, 1);
+	if (vars->fractal == JULIA)
+		julia_movements(button, vars, 1);
+	if (vars->fractal == NEWTON)
+		newton_movements(button, vars, 1);
 	return (0);
 }
 
-int	keyhook(int key_code, t_vars *vars, t_data *img)
+// 0 key 
+// 1 mouse
+
+int	keyhook(int key_code, t_vars *vars)
 {
-	(void) img;
-	printf("keycode : %d \n", key_code);
-	if (key_code == UP)
-	{
-		// mlx_clear_window(vars->mlx, vars->win);
-		*(vars->plane) = plane_to_up(*(vars->plane));
-		mandel(*(vars->plane), *vars);
-	}
-	else if (key_code == DOWN)
-	{
-		if (vars->fractal == MANDEL)
-		{
-		*(vars->plane) = plane_to_down(*(vars->plane));
-		mandel(*(vars->plane), *vars);
-		}
-	}
-	else if (key_code == LEFT)
-	{
-		*(vars->plane) = plane_to_left(*(vars->plane));
-		mandel(*(vars->plane), *vars);
-	}
-	else if (key_code == RIGHT)
-	{
-		*(vars->plane) = plane_to_right(*(vars->plane));
-		mandel(*(vars->plane), *vars);
-	}
+	if (vars->fractal == MANDEL)
+		mandel_movements(key_code, vars, 0);
+	if (vars->fractal == JULIA)
+		julia_movements(key_code, vars, 0);
+	if (vars->fractal == NEWTON)
+		newton_movements(key_code, vars, 0);
 	else if (key_code == 65307 || key_code == 113)
 	{
 		mlx_clear_window(vars->mlx, vars->win);
-		// mlx_loop_end(vars->mlx);
+		mlx_loop_end(vars->mlx);
 		ft_close(vars);
 	}
 	return (0);
 }
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-void	init_plane_vars(t_plane *plane, t_vars *vars)
-{
-	plane->remin = -2.0;
-	plane->remax = 2.0;
-	plane->immin = -1.0;
-	plane->immax = 1.0;
-	plane->size_view = plane->remax - plane->remin;
-	plane->size_view_y = plane->immax - plane->immin;
-	plane->pixelsize = plane->size_view / 1000;
-	vars->mlx = mlx_init();
-	vars->size_win_x = 1000.;
-	vars->size_win_y = 500.;
-	vars->win = mlx_new_window(vars->mlx, vars->size_win_x, vars->size_win_y,
-			"Mandelbrot");
-	vars->plane = plane;
-}
+// void	init_plane_vars(t_plane *plane, t_vars *vars)
+// {
+// 	plane->remin = -2.0;
+// 	plane->remax = 2.0;
+// 	plane->immin = -1.0;
+// 	plane->immax = 1.0;
+// 	plane->size_view = plane->remax - plane->remin;
+// 	plane->size_view_y = plane->immax - plane->immin;
+// 	plane->pixelsize = plane->size_view / 1000;
+// 	plane->pixelsize_y = plane->size_view_y / 500;
+// 	vars->mlx = mlx_init();
+// 	vars->size_win_x = 1000.;
+// 	vars->size_win_y = 500.;
+// 	vars->win = mlx_new_window(vars->mlx, vars->size_win_x, vars->size_win_y,
+// 			"Mandelbrot");
+// 	vars->plane = plane;
+// }
